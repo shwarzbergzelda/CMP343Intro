@@ -2,6 +2,22 @@
 
 // Step 1: When the submit button is pressed
 
+function loadComments() {
+
+    console.log("...loading comments")
+
+    let loadedComments = localStorage.getItem("savedComments")
+
+    if(loadedComments) {
+        let commentList = document.getElementById("comment-list")
+
+        // if loaded comments is not null, show the comments in the HTML
+        commentList.innerHTML = loadedComments
+    } else {
+        console.log("savedComments was not found")
+    }
+}
+
 function addComment() {
     // alert("Comment submitted!")
 
@@ -25,4 +41,19 @@ function addComment() {
     </li>`
 
     commentList.innerHTML = newComments
+
+    saveComments(newComments)
 }
+
+function saveComments(comments) {
+    // receive our current list of comments and save them to LocalStorage
+    
+    console.log("...saving comments")
+
+    localStorage.setItem("savedComments", comments)
+
+    console.log("comments saved!")
+}
+
+// call loadComments when page loads
+loadComments()
